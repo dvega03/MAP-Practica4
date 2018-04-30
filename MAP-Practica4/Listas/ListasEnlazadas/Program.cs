@@ -10,7 +10,8 @@ namespace ListasEnlazadas
     {
         static void Main(string[] args)
         {
-          
+            Lista lista = new Lista(3, 2);
+            bool p = lista.borraElto(5);
         }
     }
 
@@ -82,41 +83,37 @@ namespace ListasEnlazadas
         {
 
             Nodo aux = pri;
-            Nodo ant = null;
+            Nodo anterior = null;
 
             bool deleted = false;
 
-            int max = cuentaEltos();
-
-
-            if(aux != null)
+            if(pri != null)
             {
-                if (max == 1)
+                if(aux == pri && aux.dato == e)
                 {
-                    if (aux.dato == e)
-                    {
-                        pri = aux.sig;
-                        deleted = true;
-                    }
-                }
-                else
+                    
+                    pri = aux.sig;
+                    deleted = true;
+                    
+                    
+                }else
                 {
-                    while (aux != null && aux.dato != e)
+                    
+                    while(aux.sig != null && aux.sig.dato != e)
                     {
-                        if (aux.sig.dato == e)
-                        {
-                            ant = aux;
-                        }
-
                         aux = aux.sig;
                     }
 
-                    if (aux != null)
+                    if (aux.sig != null)
                     {
-                        ant.sig = aux.sig;
+                        anterior = aux;
+                        aux = aux.sig;
+                        anterior.sig = aux.sig;
                         deleted = true;
                     }
-                   
+                    else deleted = false;
+                        
+                    
                 }
             }
 
